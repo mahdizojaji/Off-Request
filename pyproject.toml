@@ -1,4 +1,7 @@
 [tool.ruff]
+exclude = [
+    "migrations"
+]
 # Enable pycodestyle (`E`) and Pyflakes (`F`) codes by default.
 lint.select = ["E", "F"]
 lint.ignore = [
