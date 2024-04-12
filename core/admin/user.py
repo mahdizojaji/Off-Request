@@ -1,6 +1,7 @@
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
 
+from core.models import BaleMessengerUser
 from core.models.user import User
 
 
@@ -59,3 +60,32 @@ class UserAdmin(BaseUserAdmin):
         "last_name",
     )
     ordering = ("id",)
+
+
+@admin.register(BaleMessengerUser)
+class BaleMessengerUserAdmin(admin.ModelAdmin):
+    list_display = (
+        "bale_id",
+        "phone_number",
+        "username",
+    )
+    fields = (
+        "bale_id",
+        "phone_number",
+        "username",
+        "first_name",
+        "last_name",
+        "created_at",
+    )
+    readonly_fields = (
+        "bale_id",
+        "phone_number",
+        "username",
+        "first_name",
+        "last_name",
+        "created_at",
+    )
+    search_fields = (
+        "bale_id",
+        "phone_number",
+    )

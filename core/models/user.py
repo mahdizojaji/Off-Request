@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser
+from django.db.models import Q
 from django.utils.translation import gettext_lazy as _
 from django.contrib.auth.base_user import BaseUserManager
 
@@ -47,3 +48,44 @@ class User(BaseModel, AbstractUser):
     class Meta:
         verbose_name = _("user")
         verbose_name_plural = _("users")
+
+
+class BaleMessengerUser(BaseModel):
+    bale_id = models.BigIntegerField(
+        verbose_name=_("Bale ID"),
+        unique=True,
+        db_index=True,
+    )
+    phone_number = models.CharField(
+        verbose_name=_("phone number"),
+        blank=True,
+        null=True,
+        default=None,
+        db_index=True,
+    )
+    username = models.CharField(
+        verbose_name=_("username"),
+        blank=True,
+    )
+    first_name = models.CharField(
+        verbose_name=_("first name"),
+        blank=True,
+    )
+    last_name = models.CharField(
+        verbose_name=_("last name"),
+        blank=True,
+    )
+
+    def __str__(self):
+        return f"{self.bale_id}"
+
+    class Meta:
+        verbose_name = _("bale user")
+        verbose_name_plural = _("bale users")
+        constraints = [
+            models.UniqueConstraint(
+                fields=["phone_number"],
+                name="unique_phone_number_when_bar_not_null",
+                condition=~Q(phone_number__isnull=False),
+            ),
+        ]

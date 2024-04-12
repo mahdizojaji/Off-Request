@@ -5,3 +5,4 @@ psycopg2==2.9.9
 pre-commit==3.7.0
 django-extensions==3.2.3
 IPython==8.23.0
+balethon==0.6.6

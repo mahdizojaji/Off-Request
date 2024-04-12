@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     "django_extensions",
     # Local django apps
     "core",
+    "balebot",
 ]
 
 MIDDLEWARE = [
@@ -137,3 +138,8 @@ STATIC_URL = "static/"
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 AUTH_USER_MODEL = "core.User"
+
+
+BALETHON = {
+    "BALE_BOT_TOKEN": config("BALETHON__BALE_BOT_TOKEN"),
+}
