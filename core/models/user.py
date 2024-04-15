@@ -38,12 +38,16 @@ class User(BaseModel, AbstractUser):
         verbose_name=_("phone number"),
         unique=True,
     )
+    is_employee = models.BooleanField(
+        verbose_name=_("employee status"),
+        default=True,
+    )
 
     USERNAME_FIELD = "phone_number"
     REQUIRED_FIELDS = []
 
     def __str__(self):
-        return f"{self.username}"
+        return f"{self.phone_number}"
 
     class Meta:
         verbose_name = _("user")
@@ -74,6 +78,15 @@ class BaleMessengerUser(BaseModel):
     last_name = models.CharField(
         verbose_name=_("last name"),
         blank=True,
+    )
+    employee_profile = models.OneToOneField(
+        verbose_name=_("employee profile"),
+        related_name="bale_profile",
+        to=User,
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        default=None,
     )
 
     def __str__(self):

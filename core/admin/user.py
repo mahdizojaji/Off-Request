@@ -1,17 +1,14 @@
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
 
-from core.models import BaleMessengerUser
 from core.models.user import User
 
 
 @admin.register(User)
 class UserAdmin(BaseUserAdmin):
     list_display = (
-        "id",
         "phone_number",
-        "first_name",
-        "last_name",
+        "get_full_name",
         "is_staff",
     )
     list_filter = ("is_staff",)
@@ -23,16 +20,6 @@ class UserAdmin(BaseUserAdmin):
                     "phone_number",
                     "first_name",
                     "last_name",
-                    "password",
-                )
-            },
-        ),
-        (
-            "Permissions",
-            {
-                "fields": (
-                    "is_staff",
-                    "groups",
                 )
             },
         ),
@@ -48,8 +35,6 @@ class UserAdmin(BaseUserAdmin):
                     "last_name",
                     "password1",
                     "password2",
-                    "is_staff",
-                    "groups",
                 ),
             },
         ),
@@ -62,7 +47,7 @@ class UserAdmin(BaseUserAdmin):
     ordering = ("id",)
 
 
-@admin.register(BaleMessengerUser)
+# @admin.register(BaleMessengerUser)
 class BaleMessengerUserAdmin(admin.ModelAdmin):
     list_display = (
         "bale_id",
