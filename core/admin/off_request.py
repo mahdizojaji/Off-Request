@@ -3,7 +3,7 @@ from django.contrib import admin
 from core.models import OffRequest
 
 
-# @admin.register(OffRequest)
+@admin.register(OffRequest)
 class OffRequestAdmin(admin.ModelAdmin):
     list_display = (
         "id",
