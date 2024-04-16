@@ -1,4 +1,5 @@
 from django.db import models
+from django.db.models import Q
 from django.utils.translation import gettext_lazy as _
 
 from core.models import User
@@ -39,3 +40,10 @@ class OffRequest(BaseModel):
     class Meta:
         verbose_name = _("off request")
         verbose_name_plural = _("off requests")
+        constraints = [
+            models.UniqueConstraint(
+                fields=["off_at", "state", "employee"],
+                name="unique_accepted_request_per_day_employee",
+                condition=~Q(state="RJCT"),
+            ),
+        ]
