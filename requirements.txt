@@ -6,3 +6,5 @@ pre-commit==3.7.0
 django-extensions==3.2.3
 IPython==8.23.0
 balethon==0.6.6
+gunicorn==21.2.0
+jdatetime==5.0.0

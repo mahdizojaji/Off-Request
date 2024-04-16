@@ -1,0 +1,65 @@
+version: '3.8'
+
+x-base:
+  &base
+  env_file:
+    - .env
+  networks:
+    - APP
+  restart: unless-stopped
+
+x-django-app:
+  &main-app-image
+  <<: *base
+  build:
+    context: .
+    network: host
+    dockerfile: Dockerfile
+  volumes:
+    - StaticFiles:/app/static
+
+services:
+  postgres:
+    <<: *base
+    image: postgres
+    volumes:
+      - ./postgres_data:/var/lib/postgresql/data
+
+  nginx:
+    <<: *base
+    image: nginx
+    ports:
+      - "8000:80"
+    volumes:
+      - ./config/nginx/conf.d/:/etc/nginx/conf.d/
+      - StaticFiles:/app/static
+    depends_on:
+      - django
+
+  redis:
+    <<: *base
+    image: redis
+    volumes:
+      - ./redis_data:/data
+
+  django:
+    <<: *main-app-image
+    command: bash -c "python manage.py migrate && gunicorn config.wsgi:application --bind :8000"
+    expose:
+      - 8000
+    depends_on:
+      - postgres
+      - redis
+
+  bale-bot:
+    <<: *main-app-image
+    command: bash -c "python manage.py migrate && python manage.py run_bale_bot"
+    depends_on:
+      - postgres
+      - redis
+
+networks:
+  APP:
+
+volumes:
+  StaticFiles:

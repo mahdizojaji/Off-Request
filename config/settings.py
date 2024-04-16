@@ -130,7 +130,14 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.0/howto/static-files/
 
-STATIC_URL = "static/"
+STATIC_URL = "/static/"
+
+# STATICFILES_DIRS = [
+#     BASE_DIR / "static",
+# ]
+
+STATIC_ROOT = BASE_DIR / "static"
+
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
@@ -145,3 +152,7 @@ BALETHON = {
 }
 
 EMPLOYER_BALE_ID = config("EMPLOYER_BALE_ID", cast=int)
+
+CSRF_TRUSTED_ORIGINS = [
+    "http://37.152.180.229:8000",
+]
