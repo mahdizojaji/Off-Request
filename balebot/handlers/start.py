@@ -16,9 +16,9 @@ class StartHandler:
         self.message = message
         user = upsert_bale_user(
             bale_id=message.author.id,
-            username=message.author.username,
-            first_name=message.author.first_name,
-            last_name=message.author.last_name,
+            username=message.author.username or "",
+            first_name=message.author.first_name or "",
+            last_name=message.author.last_name or "",
         )
         if user.phone_number and user.employee_profile:
             self.send_message_when_verified()

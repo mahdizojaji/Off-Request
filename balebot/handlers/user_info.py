@@ -7,7 +7,7 @@ class UserInfoHandler:
         self.message = message
         upsert_bale_user(
             bale_id=message.author.id,
-            username=message.author.username,
+            username=message.author.username or "",
             first_name=message.author.first_name,
             last_name=message.author.last_name,
         )
