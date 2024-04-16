@@ -42,7 +42,7 @@ class OffRequest(BaseModel):
         verbose_name_plural = _("off requests")
         constraints = [
             models.UniqueConstraint(
-                fields=["off_at", "state", "employee"],
+                fields=["off_at", "state", "employee"],  # TODO: fix it after test (remove state)
                 name="unique_accepted_request_per_day_employee",
                 condition=~Q(state="RJCT"),
             ),
