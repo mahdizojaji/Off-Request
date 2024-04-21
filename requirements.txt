@@ -1,7 +1,7 @@
 pip==24.0.*
 django==5.0.*
 python-decouple==3.8.*
-psycopg2==2.9.9
+psycopg2-binary==2.9.9
 pre-commit==3.7.0
 django-extensions==3.2.3
 IPython==8.23.0
