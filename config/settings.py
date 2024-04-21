@@ -153,6 +153,4 @@ BALETHON = {
 
 EMPLOYER_BALE_ID = config("EMPLOYER_BALE_ID", cast=int)
 
-CSRF_TRUSTED_ORIGINS = [
-    "http://37.152.180.229:8000",
-]
+CSRF_TRUSTED_ORIGINS = config("CSRF_TRUSTED_ORIGINS", cast=Csv(delimiter=","))
