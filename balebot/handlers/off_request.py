@@ -106,7 +106,7 @@ class OffRequestHandler:
                     reply_markup.add_row()
                 reply_markup.add_button(
                     InlineKeyboardButton(
-                        text=f"{date.j_months_fa[month_number - 1]} {day}",
+                        text=f"{day}",
                         callback_data=f"{self.callback_query.data}-day-{day}",
                     ),
                     row_index=day_counter // 2,
